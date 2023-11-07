@@ -28,13 +28,15 @@ class HomeScreen extends StatelessWidget {
         future: webtoons,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            return ListView.builder(
+            return ListView.separated(
+              // 인덱스가 처음엔 0부터 10까지만 호출됨 스크롤 하면 그 뒤에 필요한 아이템들이 만들어짐
               scrollDirection: Axis.horizontal,
               itemCount: snapshot.data!.length,
               itemBuilder: (context, index) {
                 var webtoon = snapshot.data![index];
                 return Text(webtoon.title);
               },
+              separatorBuilder: (context, index) => const SizedBox(width: 20),
             );
           }
           return const Center(
